@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>パスワードメーカー</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+  </head>
+  <body class="bg-light">
+    <div class="container" id="app">
+      <div class="row">
+        <div class="col-12 offset-6 bg-white pt-5 pb-5">
+          <!-- 全体24のうちcol-12の半分で表示。offset-6で右に6ずらす -->
+          <!-- pb-5は背景白を増やす -->
+          <h1 class="text-center">パスワードメーカー</h1>
+          <input
+            type="text"
+            class="mt-5 form-control form-control-lg text-center"
+            :value="password"
+            readonly
+          />
+          <!-- :があるとvue.jsからきたものを受け取っている。 -->
+          <div class="row mt-5">
+            <!--mt-は上下に余白-->
+            <div class="col-18 offset-6">
+              <h2>カスタマイズ</h2>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="small_alpha"
+                      v-model="small_alpha"
+                    />
+                    <label class="form-check-label" for="small_alpha"
+                      >英小文字</label
+                    >
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="numbers"
+                      v-model="numbers"
+                    />
+                    <label class="form-check-label" for="number">数字</label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="big_alpha"
+                      v-model="big_alpha"
+                    />
+                    <label class="form-check-label" for="big_alpha"
+                      >英大文字</label
+                    >
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="symbols"
+                      v-model="symbols"
+                    />
+                    <label class="form-check-label" for="symbols">記号</label>
+                  </div>
+                </div>
+
+                <div class="d-flex mt-3">
+                  <label for="length" class="col-form-label">文字数</label>
+                  <div class="ms-3">
+                    <input
+                      type="number"
+                      id="length"
+                      class="form-control"
+                      v-model="length"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- .col-18 -->
+          </div>
+          <!-- row -->
+        </div>
+        <!-- .col-12 -->
+      </div>
+      <!-- .row -->
+    </div>
+    <!-- .container -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <script>
+      const myApp = {
+        // dataに定義した内容は、フォームのcontrollerと紐付けされる。
+        data() {
+          return {
+            big_alpha: true, //trueでボタンがオン
+            small_alpha: true,
+            numbers: true,
+            symbols: true,
+            length: 10,
+          };
+        },
+        computed: {
+          password() {
+            // 使う文字のパーツ
+            const big_alpha_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const small_alpha_string = "abcdefghijklmnopqrstuvwxyz";
+            const number_string = "0123456789";
+            const symbol_string = "!#$%&@?()=~{}_+;:";
+
+            // trueならパーツを追加、そうでないなら空の配列を渡す。
+            let source = "";
+            source += this.big_alpha ? big_alpha_string : ""; //データを使うときはthisをいれる
+            source += this.small_alpha ? small_alpha_string : "";
+            source += this.numbers ? number_string : "";
+            source += this.symbols ? symbol_string : "";
+
+            if (source === "") {
+              return "-";
+            }
+
+            let ret = "";
+            for (let i = 0; i < this.length; i++) {
+              // * source.lengthをかけることでパーツの要素数までを考慮
+              let rand = Math.floor(Math.random() * source.length);
+
+              // 計10回をランダムに行い
+              ret += source.substr(rand, 1);
+            }
+
+            // substr(1,3)で1文字目から3文字抜き出す
+
+            return ret;
+          },
+        },
+      };
+      Vue.createApp(myApp).mount("#app");
+      // idがappとなっているところをvue.jsの対象とする。
+    </script>
+  </body>
+</html>
