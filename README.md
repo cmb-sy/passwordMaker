@@ -1,13 +1,13 @@
-### overview
+## overview
 An application that randomly generates passwords
 
-### Technology
+## Technology
 - Vue3.0
 
-### Demo
+## Demo
 
 
-### Reference materials
-たにぐちまことのともすたチャンネル
+## Reference materials
+たにぐちまことのともすたチャンネル<br>
 https://www.youtube.com/watch?v=Mh8ZnnKn9Bc
 
