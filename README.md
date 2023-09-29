@@ -1,9 +1,9 @@
 ## overview
 According to the IPA announcement (2018), secure passwords should follow the following rules. This application can create passwords according to the following rules.
 #### The following rules
-- Consists of at least 10 characters.
-- They also mix numbers and symbols such as "@", "%", and "" in their passwords.
-- The password contains both uppercase and lowercase letters.
+- At least 10 characters.
+- Mix numbers and symbols such as "@", "%", and "" in their passwords.
+- Contains both uppercase and lowercase letters.
 - Different passwords are set for each service.
 
 ## Technology
