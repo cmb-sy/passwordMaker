@@ -20,11 +20,9 @@
             readonly
           />
           <!-- :があるとvue.jsからきたものを受け取っている。 -->
-          <div class="row mt-5">
+          <div class="row mt-4">
             <!--mt-は上下に余白-->
             <div class="col-18 offset-6">
-              <h2>カスタマイズ</h2>
-
               <div class="row">
                 <div class="col-12">
                   <div class="form-check form-switch">
@@ -78,7 +76,7 @@
                   </div>
                 </div>
 
-                <div class="d-flex mt-3">
+                <div class="d-flex mt-4">
                   <label for="length" class="col-form-label">文字数</label>
                   <div class="ms-3">
                     <input
@@ -116,11 +114,16 @@
         },
         computed: {
           password() {
-            // 使う文字のパーツ
+            // 文字パーツ
             const big_alpha_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const small_alpha_string = "abcdefghijklmnopqrstuvwxyz";
             const number_string = "0123456789";
             const symbol_string = "!#$%&@?()=~{}_+;:";
+
+            // 10文字以下は受け付けない
+            if (this.length < 10) {
+              this.length = 10;
+            }
 
             // trueならパーツを追加、そうでないなら空の配列を渡す。
             let source = "";
@@ -129,6 +132,7 @@
             source += this.numbers ? number_string : "";
             source += this.symbols ? symbol_string : "";
 
+            // 全てボタンが全てFalseの場合
             if (source === "") {
               return "-";
             }
@@ -137,13 +141,8 @@
             for (let i = 0; i < this.length; i++) {
               // * source.lengthをかけることでパーツの要素数までを考慮
               let rand = Math.floor(Math.random() * source.length);
-
-              // 計10回をランダムに行い
               ret += source.substr(rand, 1);
             }
-
-            // substr(1,3)で1文字目から3文字抜き出す
-
             return ret;
           },
         },
