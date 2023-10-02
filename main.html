@@ -11,14 +11,22 @@
       <div class="row">
         <div class="col-12 offset-6 bg-white pt-5 pb-5">
           <!-- 全体24のうちcol-12の半分で表示。offset-6で右に6ずらす -->
-          <!-- pb-5は背景白を増やす -->
           <h1 class="text-center">パスワードメーカー</h1>
-          <input
-            type="text"
-            class="mt-5 form-control form-control-lg text-center"
-            :value="password"
-            readonly
-          />
+          <div>
+            <input
+              type="text"
+              id="tagText"
+              class="mt-5 form-control form-control-lg text-center"
+              :value="password"
+              readonly
+            />
+
+            <!-- コピー -->
+            <button v-on:click="copyPassword()" class="btn btn-primary">
+              コピー
+            </button>
+          </div>
+
           <!-- :があるとvue.jsからきたものを受け取っている。 -->
           <div class="row mt-4">
             <!--mt-は上下に余白-->
@@ -112,6 +120,18 @@
             length: 10,
           };
         },
+        methods: {
+          // クリップボードへコピー
+          copyPassword() {
+            // クリップボードへ書き込む
+            const tagText = document.getElementById("tagText").value;
+            return navigator.clipboard.writeText(tagText).then(() => {
+              //非同期処理において完了なら動くもの
+              alert("コピーしました。");
+            });
+          },
+        },
+
         computed: {
           password() {
             // 文字パーツ
@@ -132,7 +152,7 @@
             source += this.numbers ? number_string : "";
             source += this.symbols ? symbol_string : "";
 
-            // 全てボタンが全てFalseの場合
+            // ボタンが全てFalseの場合
             if (source === "") {
               return "-";
             }
@@ -147,6 +167,7 @@
           },
         },
       };
+
       Vue.createApp(myApp).mount("#app");
       // idがappとなっているところをvue.jsの対象とする。
     </script>
