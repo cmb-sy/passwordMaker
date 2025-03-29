@@ -13,7 +13,3 @@ This application added character limit and copy function based on reference mate
 # Application image
 ![image](https://github.com/nakashima1125/passwordMaker/assets/63276819/271360b9-0d25-4088-babd-8c24f2a138bd)
 
-# Reference materials
-たにぐちまことのともすたチャンネル<br>
-https://www.youtube.com/watch?v=Mh8ZnnKn9Bc
-
